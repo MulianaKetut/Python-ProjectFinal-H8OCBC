@@ -18,16 +18,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-# create a URL route in our application for "/"
-@connex_app.route("/")
-def home():
-    """
-    This function just responds to the browser URL
-    localhost:5000/
-    :return:        hello
-    """
-    return "<h1>Deployed to Heroku</h1>"
-
 # Create the SQLAlchemy db instance
 db = SQLAlchemy(app)
 
