@@ -1,6 +1,6 @@
 """
 This is the directors module and supports all the REST actions for the
-directors data
+directors and movies data
 """
 
 from flask import make_response, abort, jsonify
@@ -22,8 +22,8 @@ def read_all():
     movie_schema = MoviesSchema(many=True)
     data = movie_schema.dump(movies)
 
-    if(data.count == 0):
-        return jsonify({"detail": "Data movies empty!"})
+    if(len(data) == 0):
+        return abort(404, f"Movies data not found!")
 
     return data
 
@@ -86,8 +86,8 @@ def read_limit(limit, order, attribute):
     movie_schema = MoviesSchema(many=True)
     data = movie_schema.dump(movies)
 
-    if(data.count == 0):
-        return jsonify({"detail": "Data movies empty!"})
+    if(len(data) == 0):
+        return abort(404, f"Movies data not found!")
 
     return data
 
@@ -354,7 +354,7 @@ def search_all(keyword):
     movie_schema = MoviesSchema(many=True)
     data = movie_schema.dump(movies)
 
-    if(data.count == 0):
-        return jsonify({"detail": f"Data movies not found with keywords {keyword}!"})
+    if(len(data) == 0):
+        return abort(404, f"Movies data not found with keyword {keyword}!")
 
     return data
