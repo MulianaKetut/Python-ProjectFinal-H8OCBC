@@ -132,7 +132,7 @@ paths:
                 type: string
                 description: Department of the director
   
-  /directors-filter:
+  /directors-filter/{limit}/{order}/{attribute}:
     get:
       operationId: directors.read_limit
       tags:
@@ -141,17 +141,17 @@ paths:
       description: Read the entire set of director, sorted by id (input asc or desc in order field)
       parameters:
         - name: limit
-          in: query
+          in: path
           description: limit of the director to get
           type: integer
           required: True
         - name: order
-          in: query
+          in: path
           description: order (asc or desc) of the director to get
           type: string
           required: True
         - name: attribute
-          in: query
+          in: path
           description: attribute (id, name, gender, uid, department) of the director to get.
           type: string
           required: True

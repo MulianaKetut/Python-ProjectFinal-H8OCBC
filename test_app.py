@@ -4,7 +4,7 @@ import json
 
 
 BASE_DIRECTORS_URL = '/api/directors'
-GET_DIRECTORS_LIMIT = '{}/3/desc'.format(BASE_DIRECTORS_URL)
+GET_DIRECTORS_LIMIT = '{}-filter/3/desc/id'.format(BASE_DIRECTORS_URL)
 GET_DIRECTORS_ONE = '{}/7110'.format(BASE_DIRECTORS_URL)
 GET_DIRECTORS_NOT_FOUND = '{}/-1'.format(BASE_DIRECTORS_URL)
 
@@ -45,7 +45,7 @@ class TestFlaskApi(unittest.TestCase):
             "department": "string",
             "gender": 0,
             "name": "string",
-            "uid": 0
+            "uid": 1
         }
         response = self.connex_app.post(BASE_DIRECTORS_URL, data=json.dumps(
             director), content_type='application/json')
