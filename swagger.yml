@@ -132,7 +132,7 @@ paths:
                 type: string
                 description: Department of the director
   
-  /directors/{limit}/{order}/{attribute}:
+  /directors-filter:
     get:
       operationId: directors.read_limit
       tags:
@@ -141,17 +141,17 @@ paths:
       description: Read the entire set of director, sorted by id (input asc or desc in order field)
       parameters:
         - name: limit
-          in: path
+          in: query
           description: limit of the director to get
           type: integer
           required: True
         - name: order
-          in: path
+          in: query
           description: order (asc or desc) of the director to get
           type: string
           required: True
         - name: attribute
-          in: path
+          in: query
           description: attribute (id, name, gender, uid, department) of the director to get.
           type: string
           required: True
@@ -221,7 +221,7 @@ paths:
                         type: integer
                         description: UID date of this movie
 
-  /directors/{keyword}:
+  /directors-name/{keyword}:
     get:
       operationId: directors.search_all
       tags:
@@ -516,7 +516,7 @@ paths:
                       type: string
                       description: Department of the director
 
-  /movies/{keyword}:
+  /movies-title/{keyword}:
     get:
       operationId: movies.search_all
       tags:
@@ -594,7 +594,7 @@ paths:
                       type: string
                       description: Department of the director
 
-  /movies/{limit}/{order}/{attribute}:
+  /movies-filter:
     get:
       operationId: movies.read_limit
       tags:
@@ -603,17 +603,17 @@ paths:
       description: Read the entire set of movies for all directors, sorted by id (input asc or desc for order data)
       parameters:
         - name: limit
-          in: path
+          in: query
           description: limit of the movies to get
           type: integer
           required: True
         - name: order
-          in: path
+          in: query
           description: order of the movies to get
           type: string
           required: True
         - name: attribute
-          in: path
+          in: query
           description: attribute (id, director id, original title, budget, popularity, release date, revenue, title, vote average, vote count, overview, tagline, uid) of the movies to get
           type: string
           required: True

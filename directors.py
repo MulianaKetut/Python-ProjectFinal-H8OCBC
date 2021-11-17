@@ -39,7 +39,7 @@ def read_limit(limit, order, attribute):
     :param attribute:   request order by attribute in directors
     :return:            json string of list of limit directors order by req, message data empty
     """
-    #check attribute
+    # check attribute
     if not hasattr(Directors, attribute):
         abort(404, f"Director not found for attribute {attribute}!")
 
@@ -80,11 +80,7 @@ def read_one(id):
     :return:            director matching id, 404 if not found
     """
     # Build the initial query
-    director = (
-        Directors.query.filter(Directors.id == id)
-        .outerjoin(Movies)
-        .one_or_none()
-    )
+    director = Directors.query.filter(Directors.id == id).one_or_none()
 
     # Did we find a director?
     if director is not None:
@@ -220,15 +216,16 @@ def delete(id):
     else:
         abort(404, f"Director not found for ID: {id}!")
 
+
 def search_all(keyword):
     """search data by field name with like
-    
+
     Keyword arguments:  keyword -- word for search data use like
     Return: data directors with name like keyword
     """
     search = "%{}%".format(keyword)
     directors = Directors.query.filter(Directors.name.like(search)).all()
-    
+
     # Serialize the data for the response
     director_schema = DirectorsSchema(many=True)
     data = director_schema.dump(directors)

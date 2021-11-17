@@ -37,52 +37,51 @@ def read_limit(limit, order, attribute):
     :param order:       asc or desc order
     :return:            json list of limit movies order by request, message if data empty
     """
-    #check attribute
-    if not hasattr(Movies, attribute):
-        abort(404, f"Movies not found for attribute {attribute}!")
 
     # Create the list of movies from our data
     # match attribute:
     if attribute == 'id':
         movies = Movies.query.order_by(db.desc(
             Movies.id) if f'{order}' == 'desc' else db.asc(Movies.id)).limit(limit)
-    if attribute == 'director id':
+    elif attribute == 'director id':
         movies = Movies.query.order_by(db.desc(
             Movies.director_id) if f'{order}' == 'desc' else db.asc(Movies.director_id)).limit(limit)
-    if attribute == 'original title':
+    elif attribute == 'original title':
         movies = Movies.query.order_by(db.desc(
             Movies.original_title) if f'{order}' == 'desc' else db.asc(Movies.original_title)).limit(limit)
-    if attribute == 'budget':
+    elif attribute == 'budget':
         movies = Movies.query.order_by(db.desc(
             Movies.budget) if f'{order}' == 'desc' else db.asc(Movies.budget)).limit(limit)
-    if attribute == 'popularity':
+    elif attribute == 'popularity':
         movies = Movies.query.order_by(db.desc(
             Movies.popularity) if f'{order}' == 'desc' else db.asc(Movies.popularity)).limit(limit)
-    if attribute == 'release date':
+    elif attribute == 'release date':
         movies = Movies.query.order_by(db.desc(
             Movies.release_date) if f'{order}' == 'desc' else db.asc(Movies.release_date)).limit(limit)
-    if attribute == 'revenue':
+    elif attribute == 'revenue':
         movies = Movies.query.order_by(db.desc(
             Movies.revenue) if f'{order}' == 'desc' else db.asc(Movies.revenue)).limit(limit)
-    if attribute == 'title':
+    elif attribute == 'title':
         movies = Movies.query.order_by(db.desc(
             Movies.title) if f'{order}' == 'desc' else db.asc(Movies.title)).limit(limit)
-    if attribute == 'vote average':
+    elif attribute == 'vote average':
         movies = Movies.query.order_by(db.desc(
             Movies.vote_average) if f'{order}' == 'desc' else db.asc(Movies.vote_average)).limit(limit)
-    if attribute == 'vote count':
+    elif attribute == 'vote count':
         movies = Movies.query.order_by(db.desc(
             Movies.vote_count) if f'{order}' == 'desc' else db.asc(Movies.vote_count)).limit(limit)
-    if attribute == 'overview':
+    elif attribute == 'overview':
         movies = Movies.query.order_by(db.desc(
             Movies.overview) if f'{order}' == 'desc' else db.asc(Movies.overview)).limit(limit)
-    if attribute == 'tagline':
+    elif attribute == 'tagline':
         movies = Movies.query.order_by(db.desc(
             Movies.tagline) if f'{order}' == 'desc' else db.asc(Movies.tagline)).limit(limit)
-    if attribute == 'uid':
+    elif attribute == 'uid':
         movies = Movies.query.order_by(db.desc(
             Movies.uid) if f'{order}' == 'desc' else db.asc(Movies.uid)).limit(limit)
-    
+    else:
+        abort(404, f"Movies not found for attribute {attribute}!")
+
     # Serialize the list of movies from our data
     movie_schema = MoviesSchema(many=True)
     data = movie_schema.dump(movies)
