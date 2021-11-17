@@ -48,16 +48,16 @@ def read_limit(limit, order, attribute):
     if attribute == 'id':
         directors = Directors.query.order_by(db.desc(
             Directors.id) if f'{order}' == 'desc' else db.asc(Directors.id)).limit(limit)
-    if attribute == 'name':
+    elif attribute == 'name':
         directors = Directors.query.order_by(db.desc(
             Directors.name) if f'{order}' == 'desc' else db.asc(Directors.name)).limit(limit)
-    if attribute == 'gender':
+    elif attribute == 'gender':
         directors = Directors.query.order_by(db.desc(
             Directors.gender) if f'{order}' == 'desc' else db.asc(Directors.gender)).limit(limit)
-    if attribute == 'uid':
+    elif attribute == 'uid':
         directors = Directors.query.order_by(db.desc(
             Directors.uid) if f'{order}' == 'desc' else db.asc(Directors.uid)).limit(limit)
-    if attribute == 'department':
+    elif attribute == 'department':
         directors = Directors.query.order_by(db.desc(
             Directors.department) if f'{order}' == 'desc' else db.asc(Directors.department)).limit(limit)
 
