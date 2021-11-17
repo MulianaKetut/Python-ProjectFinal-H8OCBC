@@ -44,22 +44,22 @@ def read_limit(limit, order, attribute):
         abort(404, f"Director not found for attribute {attribute}!")
 
     # Create the list of directors from our data
-    match attribute:
-        case 'id':
-            directors = Directors.query.order_by(db.desc(
-                Directors.id) if f'{order}' == 'desc' else db.asc(Directors.id)).limit(limit)
-        case 'name':
-            directors = Directors.query.order_by(db.desc(
-                Directors.name) if f'{order}' == 'desc' else db.asc(Directors.name)).limit(limit)
-        case 'gender':
-            directors = Directors.query.order_by(db.desc(
-                Directors.gender) if f'{order}' == 'desc' else db.asc(Directors.gender)).limit(limit)
-        case 'uid':
-            directors = Directors.query.order_by(db.desc(
-                Directors.uid) if f'{order}' == 'desc' else db.asc(Directors.uid)).limit(limit)
-        case 'department':
-            directors = Directors.query.order_by(db.desc(
-                Directors.department) if f'{order}' == 'desc' else db.asc(Directors.department)).limit(limit)
+    # match attribute:
+    if attribute == 'id':
+        directors = Directors.query.order_by(db.desc(
+            Directors.id) if f'{order}' == 'desc' else db.asc(Directors.id)).limit(limit)
+    if attribute == 'name':
+        directors = Directors.query.order_by(db.desc(
+            Directors.name) if f'{order}' == 'desc' else db.asc(Directors.name)).limit(limit)
+    if attribute == 'gender':
+        directors = Directors.query.order_by(db.desc(
+            Directors.gender) if f'{order}' == 'desc' else db.asc(Directors.gender)).limit(limit)
+    if attribute == 'uid':
+        directors = Directors.query.order_by(db.desc(
+            Directors.uid) if f'{order}' == 'desc' else db.asc(Directors.uid)).limit(limit)
+    if attribute == 'department':
+        directors = Directors.query.order_by(db.desc(
+            Directors.department) if f'{order}' == 'desc' else db.asc(Directors.department)).limit(limit)
 
     # Serialize the data for the response
     director_schema = DirectorsSchema(many=True)
